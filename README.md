@@ -1,10 +1,10 @@
 # TIL
 Today I Learned
 
-##HTML
+## HTML
 
-##CSS
+## CSS
 
-##TypeScript
+## TypeScript
 
-##etc
+## etc
