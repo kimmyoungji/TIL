@@ -1,11 +1,11 @@
-### margin collapsing
-## 1. margin collapsing 이란: element의 마진이 겹치는 현상
+# margin collapsing
 
-## 2. margin과 padding의 용도차이: 
+## 1. margin collapsing
+element의 마진이 겹치는 현상
+## 2. margin과 padding의 용도차이
 - margin은 sibling 요소관계에서의 여백을 위한 속성이고
 - padding은 parent-child 요소관계에서의 여백을 위한 속성이다.
-
-## 3. margin collapsing rules:
+## 3. margin collapsing rules
 - 수평 마진에서만 margin collapsing이 발생한다.
 - 하위 조건을 충족할 경우, child의 margin이 parent에세 전이된다.
   - parent 요소와 child 요소가 인접한다.(사이를 가로 막는 padding,border 또는 다른 요소가 없다)
