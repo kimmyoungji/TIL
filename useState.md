@@ -9,9 +9,11 @@ react hook 중에 하나이다.
 
 ## useState 사용예시
 ```
-const [a,setA] = useState('defaultA')
+const [a,setA] = useState('a1')
 ```
 >설명
-> - a 는 state명
-> - setA는 Setter함수명
-> - useState는 상태의 기본값을 파라미터로 받고, [현재state, setter함수]반환 한다.
+> - ```a``` 는 state명
+> - ```setA```는 Setter함수명
+> - ```useState('a1')```는 '상태의 기본값'을 파라미터로 받고, [현재state, setter함수] 반환 한다.
+> - ```useState('a1')``` 에서 ```'a1'```은 이 상태```a```의 기본값
+> - **배열 비구조화 할당** 을 통해서 각 원소를 추출해준 것이다.
