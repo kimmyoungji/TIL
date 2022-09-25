@@ -45,7 +45,34 @@
 * 라우트를 정의 할 수 있다. (API라우트, 또는 EndPoint라고 부르기도 한다)
 * 응답은 직접 조작할 수 있게 해준다.
 * +server.js (또는 +server.ts)는 HTTP verbs (GET,POST,PATCH,PUT,DELETE)와 같은 함수들을 export할 수 있다. 이 함수들은 RequestEvent를 인자로 받고, Response 객체를 반환한다.
-### 
+### Receiving data
+- + server.js에서 POST/PUT/PATCH/DELETE 핸들러등을 정의하여 API제작에 사용될 수 있다.
+### Content negotiation
+- +server.js 와 +page는 하나의 루트 폴더에 들어갈 수 있다. +page는 페이지가 되고, +server.js는 API 엔드 포인트가 된다. 
+- 하나의 루트로 들어오는 HTTP 메세지는 HTTP 메소드에 따라, 어느 파일이 해당 메시지를 처리할지 결정한다.
+- PUT/PATCH/DELETE 의 경우 항상 +server.js에 의해 처리 된다. 왜냐하면, 이것들은 페이지에 변화를 주지 않기 때문이다.
+- GET / POST 요청의 경우, 만약 헤더 prioritise text/html이 있을 받을 경우(즉, 브라우저의 페이지 요청일 경우) 페이지 요청으로 처리하고, 그 이외의 경우에는 +server.js가 다룬다. ????? 
+
+## $types
+- 위의 설명들을 하면서, 우리는 $types.d.ts 파일에서 타입들을 import해왔다. 
+- $types.d.ts 파일은 svelte가 숨겨진 폴더에 만든다
+- 만약 네가 ts 또는 jsDoc을 사용할 경우, 루트 파일과 작업을 할 때, type safety를 제공하기 위해 만들어진다. 
+```ts
+//src/routes/blog/[slug]/+page.svelte
+<script>
+  /** @type {import('./$types').PageData} */
+  export let data; //+page.js에서 export 되는 load에서 반환된 그 어떤 정보의 형태를 가짐을 의미한다.
+  // 이는 +page.server.js,+layout.js, +layout.server.js, +server.js,도 모두 해당된다.
+  // 이는 변수가 올바른 형태로 확실하게 typed 되도록 도와준다.  
+</script>
+```
+
+## other files
+- 위에서 설명한 명명 규칙에 따르지 않는 route 안의 다른 파일들은 모두 sveltekit이 무시한다.
+- 그래서 너는 컴포넌트나 유틸리티 모듈을 라우트 폴더 안에 위치 시켜도 된다.
+- 만약 컴포넌트와 모듈이 여러 라우트 폴더에 사용될 경우, 이들을 하나로 묶어서 $lib에 넣어주는 것을 추천한다.
+### $lib
+
 
 
 
