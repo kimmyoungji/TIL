@@ -9,7 +9,6 @@
     // num1.update( n => n + 100 );
 
     // onDestroy(unsubscribe);
-    $num1 = $num1 + 100;
     // $num2 = 100; 
 </script>
 
