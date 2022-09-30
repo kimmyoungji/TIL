@@ -1,57 +1,81 @@
-# $app/navigation
-- 이 모듈은 스벨트의 페이지 경로 찾기를 위한 모듈이다.
+# navigation
+- 페이지 네비게이션 기능을 모아 놓은 모듈
 
-## after navigate
-* lifecycle function이다.
-  * lifecycle fucntion이 뭐지? : 
-    * 현재의 컴포넌트가 마운트 될때, 제공된 콜백함수를 실행시킨다. 
-    * 즉, 새로운 페이지 또는 컴포넌트가 화면에 그려질 때(mount), 실행되는 함수
-* afterNavigate는 컴포넌트 초기화할 때 꼭 실행시켜야 한다.
-* afterNavigate는 컴포넌트가 화면에 그려질 동안 활성상태로 유지된다. ???? 
-  * 질문: 컴포넌트가 화면에 있으면, 계속 반복 호출이 되는 것인가? 
-  * 위의 질문은 비동기 콜백 함수를 이해해야 설명할 수 있다.
-*  질문, onMount가 있는데, 왜 afterNavigate를 사용하지??????
-```svelte
-function afterNavigate(callback: (navigation: Navigation) => void): void;
-```
+## afterNavigate
+- 컴포넌트가 마운트 되거나, 페이지가 새로운 URL로 navigate 될 때 호출되는 메소드. 
+- navigation 된 이후 원하는 처리를 콜백함수로 묶어서 인자로 전달하면, afterNavigate 내부에서 호출된다.
+- 사용예시
+  ```ts
+  import {afterNavigate} from '$app/naviagtion';
+  afterNavigate(()=>{console.log("moved to new URL")});
+  ```
 
-## before navigate
-- navigation interceptor
-- 새로운 URL로 navigate 되기 이전인 시점에 호출되는 함수
-- 링크 클릭, goto() 호출, 브라우저 앞/뒤로 가기 버튼
-- cancel()을 호출하면 navigation이 완료되는 것을 막을 수 있다.
-- beforeNavigate도 컴포넌트가 초기화 되기 이전에 호출되어야 한다.
-- beforeNavigate도 컴포넌트가 mount 되어있는 동안 활성상태에 있다.
-```svelte
-function beforeNavigate(
-  callback: (navigation: Navigation & { cancel: () => void }) => void
-): void;
-```
-
-## disableScrollHandling
-* ??? 모르겠다 별로 안 중요한 듯
+## beforeNavigate
+- 새로운 URL페이지로 navigate되기 전에 호출되는 메소드
+- navigation 되기 이전에 원하는 처리를 콜백함수로 묶어서 인자로 전달하면, beforeNavigate 내부에서 호출된다.
+  - 콜백함수의 인자로 전달되는 cancel함수는, 페이지가 navigation이 완료되는 것을 막아준다.
+  - 질문) 추가적인 정의를 해줄 수 있는가? 
+- 사용예시
+  ```ts
+	import {beforeNavigate} from '$app/navigation'
+	beforeNavigate(({()=>{console.log("cancel")}})=>{console.log("about to move to new URL")});
+  ```
 
 ## goto
-* svelteKit이 특정 URL로 naviagte하는데 성공하거나 실패하였을때, promise를 반환한다.
-* 예시
-```svelte
-function goto(
-  url: string | URL,
-  opts?: {
-    replaceState?: boolean;
-    noscroll?: boolean;
-    keepfocus?: boolean;
-    state?: any;
-  }
-): Promise<void>;
-```
+- 새로운 URL로 이동 할 때 사용하는 메소드로, promise를 반환한다.
+- 문법
+  ```ts
+  function goto(
+    url: string | URL,
+    opts?: {
+      replaceState?: boolean;
+      noscroll?: boolean;
+      keepfocus?: boolean;
+      state?: any;
+    }
+  ): Promise<void>;
+  ```
+- 사용예시
+  ```ts
+  import {goto} from '$app/navigation'
+  goto("가고자 하는 페이지의 URL");
+  ```
 
 ## invalidate
+- svelte kit의 +page.svelte는 +page.js에 load 함수가 정의된다. 여기에 페이지에서 사용하는 데이터들에 대한 기록과 연산이 이루어진다.
+- invalidate는 인자로 받는 URL의 load 함수를 원하는 시점에 호출해준다.
+- 반환값으로 promise<void>를 반환한다. 페이지가 성공적으로 update되면 resovle를 문제가 발생하면 rejected상태의 promise를 반환한다.
+- 문법
+  ```ts
+  function invalidate(url: string | URL | ((url: URL) => boolean)): Promise<void>;
+  ```
+- 사용 예시
+  ```ts
+    import {invalidate} from "$app/navigation"
+    invalidate("업데이트하고자 하는 페이지의 url");
+  ```
 
+## invalidateAll
+- 현재 활성화 되어 있는 모든 페이지의 load 함수를 실행시키고, promise로 결과를 반환한다.
+- 질문 ) 한번에 활성화 되어 있는 페이지가 1개 이상일 수가 있는가?? 
+- 문법
+  ```ts
+    function invalidateAll(): Promise<void>;
+  ```
 
+## prefetch
+- 기능1. 원하는 페이지에 사용되는 데이터들이 이미 load되어 있도록 한다.
+- 기능2. 적절한 옵션에 따라, 페이지의 load함수를 호출한다.
+- fetch API에 대해 좀 더 알아보아야 한다. 
+- 문법
+```ts
+function prefetch(href: string): Promise<void>;
+```
 
-
-
-
-> 참조
-> https://kit.svelte.dev/docs/modules#$app-navigation
+## prefetchRoutes
+- 페이지가 아닌, 라우트를 패치 해준다. promise를 결과로 반환한다.
+- load 함수를 패치 하지 않는다.
+- 문법
+```ts
+function prefetchRoutes(routes?: string[]): Promise<void>;
+```
