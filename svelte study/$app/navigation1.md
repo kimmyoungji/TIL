@@ -52,6 +52,5 @@ function goto(
 
 
 
-
 > 참조
 > https://kit.svelte.dev/docs/modules#$app-navigation
