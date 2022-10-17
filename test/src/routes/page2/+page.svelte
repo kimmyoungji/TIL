@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { num1, num2, num3 } from '../../store/store.ts';
 	import { onDestroy } from 'svelte';
 	// let countValue:number;
@@ -14,4 +14,4 @@
 
 <h1>num1: {$num1}</h1>
 <!-- <h1>num2: {$num2}</h1>
-<h1>num3: {$num3}</h1> -->
+<h1>num3: {$num3}</h1> --> -->
