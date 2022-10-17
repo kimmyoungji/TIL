@@ -1,12 +1,9 @@
 # DOM
-- The Document object model 
-- HTML, XML 문서의 프로그래밍 인터페이스
-- 문서의 구조화된 표현을 제공하여 프로그래밍언어가 DOM 구조에 접근 할 수 있는 방법을 제공하여 그들이 문서 구조, 스타일, 내용등을 변경할 수 있게 돕는다
-- DOM = nodes + objects
-- 웹페이지는 일종의 문서이다.
-- DOM은 동일한 문서를 표현하고, 저장하고, 조작하는 방법을 제공한다.
-- DOM은 웹 페이지의 객체지향표현이다.
-- JS와 같은 스크립팅 언어를 이용해 DOM을 수정할 수 있다.
+- 만약 내가 다른 사람에게, 돔을 설명한다면..
+- DOM은 document object model로, html, xml 문서를바탕으로 만들어진 구조화된 객체의 묶음이다. 
+> xml이 뭐지?? 
+- 이렇게 구조화 된 객체로 문서의 내용을 전달 받는 덕분에 우리는 보다 쉽게 html 문서의 내용을 js로 조작할 수 있다. js에서 dom을 조작하기 위한 명령어들을 제공하는데 이를 DOM API라고 한다.
+- DOM API는 상위 추상 클래스인 node를 상속 받아 필요한 기능을 구현한다.
 
 > 참조
 > https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/Introduction
