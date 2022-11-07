@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/js_test/fraction_addition.js",
+            "program": "${workspaceFolder}/js_test/hello.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
