@@ -1,0 +1,16 @@
+# handbook 훑!
+
+## 6. type Manipulation
+타입스크립트는 타입을 다른 타입들로 표현할 수 있게 해준다. 
+제네릭이 위와같은 장점을 가능하게 하는 녀석 중에 하나이다.
+사실 우리는 다양한 타입연산자들이 있다.
+우리가 이미 가지고 있는 값을 타입을 표현하는데 사용할 수 있다.
+이장에서는 이미 존재하는 타입과 값을 사용하여, 새로운 타입을 만들어 내는 방법을 알아볼 것이다.
+
+- Generics  
+- Keyof Type Operator  
+- Typeof Type Operator  
+- Indexed Access Types  
+- Conditional Types 
+- Mapped Types
+- Tamplate Literal Types
