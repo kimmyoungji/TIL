@@ -9,3 +9,7 @@ const test = (num1: number, num2: number) => {
 
 test(a, b);
 
+const str = 'hello';
+
+str.t
+
