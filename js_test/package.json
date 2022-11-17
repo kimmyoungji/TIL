@@ -1,0 +1,24 @@
+{
+  "name": "axiostest",
+  "version": "1.0.0",
+  "description": "this package is for testing axios",
+  "main": "axiostest.js",
+  "scripts": {
+    "test": "start"
+  },
+  "keywords": [
+    "axiostest"
+  ],
+  "author": "kimmyoungji",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.9",
+    "axios": "^1.1.3",
+    "express": "^4.18.2",
+    "ts-node": "^10.9.1",
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
+}

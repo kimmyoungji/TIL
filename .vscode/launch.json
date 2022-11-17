@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/js_test/hello.js",
+            "program": "${workspaceFolder}/js_test/axiostest.ts",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
