@@ -1,37 +1,95 @@
-// const axios = require('axios');
-// axios.get('https://reqres.in/api/users?page=2').then((resp) => {
-//     let arr;
-//     arr = resp.data.data.map((e) => e.id);
-//     console.log(`this is id array from resp: ${arr}`);
-// })
+// Callback
+//setTimeout(() => { console.log(2) }, 0);
+
+// Promise
+function setTimeoutPromise(sec: number): Promise<void> {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res();
+        }, sec);
+    });
+}
+//setTimeoutPromise(0).then(() => console.log(2));
+
+// Aysnc
+async function aysncFunc() {
+    console.log(1);
+    await setTimeoutPromise(0);
+    console.log(2);
+    console.log(3);
+}
+//aysncFunc();
 
 
-// console.log('\ntest2');
+// callback hell
+setTimeout(
+    () => {
+        console.log("after 1000 ms");
+        setTimeout(
+            () => {
+                console.log("after 2000 ms");
+                setTimeout(
+                    () => {
+                        console.log("after 3000 ms");
+                        setTimeout(
+                            () => {
+                                console.log("after 4000 ms");
+                            }, 4000);
+                    }, 3000);
+            }, 2000);
+    }, 1000);
 
-// function callbackHell2() {
+// callback hell - promise로 해결하기 - then hell 이 생겨버렸다.
+setTimeoutPromise(1000).then(
+    () => {
+        console.log(1000);
+        setTimeoutPromise(2000).then(
+            () => {
+                console.log(2000);
+                setTimeoutPromise(3000).then(
+                    () => {
+                        console.log(3000);
+                        setTimeoutPromise(4000).then(
+                            () => {
+                                console.log(4000);
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    }
+)
 
-// }
+// promise가 유용할때: 하나의 비동기 함수에 여러개의 콜백이 인자로 들어 갈때.. 
+// 비동기 함수가 중첩되면, promise도 then hell을 만들어낸다. 
 
-// async function aysncFunc(callback) {
-//     let data = await axios.get('https://reqres.in/api/users?page=2');
-//     console.log(data.data.id);
-// }
+async function AsyncFunc2() {
+    await setTimeoutPromise(1000);
+    console.log('1000밀리초 지남');
+    await setTimeoutPromise(2000);
+    console.log('2000밀리초 지남');
+    await setTimeoutPromise(3000);
+    console.log('3000밀리초 지남');
+    await setTimeoutPromise(4000);
+    console.log('4000밀리초 지남'); 
+}
 
-// callbackHell2();
+AsyncFunc2();
+
+// using promise to using callback
+setTimeoutPromise(1000)
+    .then(() => console.log('a'))
+    .then(() => { console.log('b') })
+    .then(() => { console.log('c') })
+    .catch(() => { console.log('error') });
+
+setTimeout(() => {
+    console.log('a');
+    console.log('b');
+    console.log('c');
+}, 1000)
+// 아직 프로미스의 유용성에 대해서는 체감을 못하겠다....  
 
 
 
-// 내가 알고 싶은게 뭐지? then이 반환하는게 뭐지? 프라미스.. 흠 그럼 프라미스를 먼저 공부를 해야 겠네..
-// ㅇㅋ 그럼 프라미스 공부하고 올께
-
-// a b c c b a 
-// a b c cc bb aa 
-
-// c cc b bb a aa
-
-
-let a = 1;
-console.log(a);
-setTimeout(() => { console.log(a), 3000 });
-a = 2;
-console.log(a);
